@@ -122,6 +122,8 @@ final double PI = 3.1415926;
 int[] ary = new int[10];
 //有十个元素的整数类型数组
 //其语法格式为 数据类型[] 变量名 = new 数据类型[数组大小]
+int i = ary.length;
+//将数组长度赋值给 i
 ```
 
 ### 字符串
@@ -134,11 +136,48 @@ String a = "Hello";
 //还可以使用字符数组构造一个字符串变量
 char[] stringArray = {'H','e','l','l','o'};
 String s = new String(stringArray);
+//字符串与字符串 (或其他类型) 可以用 + 号连接成新字符串
+String str1 = a + " world";
+String str2 = "2 + 2 = " + (2 + 2); //"2 + 2 = 4" 注意括号
+//访问字符串长度
+int len = str1.length();
 ```
 
 ### 输出
 
-可以对变量进行格式化输出
+java 中的输出
+
+```java
+class Test{
+    public static void main(String[] args) {
+        int num = 10; // 一个整型
+        System.out.print(i); // 不换行输出 i
+        System.out.println(); // 换行
+        System.out.println(i) // 输出 i 并换行
+        // 也可以用字符串连接
+        System.out.priintln("i 的值为 " + i);
+    }
+}
+```
+
+数组可以用 for 循环迭代输出，也可以用用内置工具类转为字符串输出
+
+```java
+//导入数组工具类
+import java.util.Arrays;
+class Test{
+    public static void main(String[] args) {
+        int[] arr = {0, 1, 2, 3};
+        // 直接输出会输出数组的 hashcode 值
+        System.out.println(arr);
+        // 使用 Arrays.toString() 转为字符串输出 (不会改变原数组)
+        System.out.println(Arrays.toString(arr));
+        // 将会输出 [0, 1, 2, 3]
+    }
+}
+```
+
+也可以实现 c 风格的输出
 
 |   符号   |   意义  |
 | :----: | :---: |
@@ -148,16 +187,16 @@ String s = new String(stringArray);
 |  `%c`  |  字符类型 |
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
         int a = 12;
         char b = 'A';
         double s = 3.14;
         String str = "Hello world";
-        System.out.println("%f",s);
-        System.out.println("%d",a);
-        system.out.println("%c",b);
-        system.out.println("%s",str);
+        System.out.printf("%f",s);
+        System.out.printf("%d",a);
+        System.out.printf("%c",b);
+        System.out.printf("%s",str);
     }
 }
 ```
@@ -169,7 +208,7 @@ class test{
 -   if
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
         if(/*判断条件*/){
               //条件成立时执行这里面的代码
@@ -181,7 +220,7 @@ class test{
 -   if...else
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
         if(/*判断条件*/){
             //条件成立时执行这里面的代码
@@ -195,7 +234,7 @@ class test{
 -   if...else if...else
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
         if(/*判断条件*/){
             //判断条件成立执行这里面的代码
@@ -213,7 +252,7 @@ class test{
 -   for
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
             for(/*初始化*/;/*循环的判断条件*/;/*每次循环后执行的步骤*/){
                 //当循环的条件成立执行循环体内代码
@@ -225,7 +264,7 @@ class test{
 -   while
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
         while(/*判定条件*/){
             //条件成立时执行循环体内代码
@@ -237,7 +276,7 @@ class test{
 -   do...while
 
 ```java
-class test{
+class Test{
     public static void main(String[] args) {
         do{
           //需要执行的代码
@@ -249,7 +288,7 @@ class test{
 -   switch...case
 
 ```java
-class test{
+class Test{
       public static void main(String[] args) {
         switch(/*表达式*/){
           case /*值-1*/:
@@ -269,18 +308,24 @@ class test{
 
 ### 类名与文件名一致
 
-创建 Java 源程序需要类名和文件名一致才能编译通过，否则编译器会提示找不到 `类` 。通常该文件名会在具体 OJ 中指定。
+**java 中的类名首字母必须大写。**
+
+一个 java 文件里可以有很多类， 但是带 public 修饰的类只能有一个，并且如果有 public 类，那么该文件的文件名就必须为 public 类名。
 
 例：
 
 Add.java
 
 ```java
-class Add{
+class A{}
+
+class B{}
+
+public class Add{
     public static void main(String[] args) {
         // ...
     }
 }
 ```
 
-在该文件中需使用 Add 为类名方可编译通过。
+编译该文件会得到三个 class 文件。
